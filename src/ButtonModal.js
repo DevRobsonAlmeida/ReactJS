@@ -1,7 +1,9 @@
 import React from 'react';
 
-const ButtonModal = ({ setModal }) => {
-  return <button onClick={() => setModal(true)}> Abrir </button>;
+const ButtonModal = ({ modal, setModal }) => {
+  if (modal === false)
+    return <button onClick={() => setModal(true)}> Abrir </button>;
+  return null;
 };
 
 export default ButtonModal;

@@ -22,7 +22,9 @@ function App() {
 
   function handleClick(params) {
     setAtivo(!ativo);
-    setDados({ ...dados, faculdade: 'Possui Faculdade' });
+    if (ativo === true) setDados({ ...dados, faculdade: 'Possui Faculdade' });
+    if (ativo === false)
+      setDados({ ...dados, faculdade: 'Não Possui Faculdade' });
   }
 
   return (
@@ -32,9 +34,8 @@ function App() {
       <p>Faculdade: {dados.faculdade}</p>
       <button onClick={handleClick}>{ativo ? 'Ativo' : 'Inativo'}</button>
       <p></p>
-
-      <ButtonModal setModal={setModal} />
       <div>{modal ? 'Modal aberto' : 'Modal Fechado'}</div>
+      <ButtonModal modal={modal} setModal={setModal} />
       <Modal modal={modal} setModal={setModal} />
     </div>
   );
