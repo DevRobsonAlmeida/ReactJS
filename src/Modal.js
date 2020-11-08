@@ -5,7 +5,7 @@ const Modal = ({ modal, setModal }) => {
     return (
       <div>
         <button onClick={() => setModal(false)}>Fechar</button>
-        Esse é um modal.
+        Esse é um modal. Agora fecha.
       </div>
     );
   return null;
