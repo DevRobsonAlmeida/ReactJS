@@ -1,10 +1,20 @@
 import React from 'react';
-import Form from './Form/Form';
+import Header from './Header';
+import Home from './Home';
+import Produtos from './Produtos';
 
 function App() {
+  let Pagina;
+  const { pathname } = window.location;
+  if (pathname === '/produtos') {
+    Pagina = Produtos;
+  } else {
+    Pagina = Home;
+  }
   return (
     <>
-      <Form />
+      <Header />
+      <Pagina />
     </>
   );
 }
