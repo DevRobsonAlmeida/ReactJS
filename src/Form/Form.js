@@ -1,19 +1,14 @@
 import React from 'react';
+import Button from './Button';
 import Input from './Input';
 
 const Form = () => {
+  const arr = ['Item 1', 'Item 2'];
   return (
     <>
-      <form>
-        <p>
-          <label htmlFor="nome">Nome</label>
-          <Input />
-        </p>
-        <p>
-          <label htmlFor="Email">Email</label>
-          <Input />
-        </p>
-      </form>
+      <Input id="email" label="Email" required></Input>
+      <Input id="senha" type="password" label="Senha"></Input>
+      <Button items={arr} />
     </>
   );
 };
