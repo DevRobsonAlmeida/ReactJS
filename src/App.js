@@ -1,34 +1,32 @@
 import React from 'react';
-import ComponenteMontou from './ComponenteMontou';
-import ConhecimetoBasico from './ConhecimetoBasico';
 import Produto from './Produto';
 
 const App = () => {
-  const [ativo, setAtivo] = React.useState(false);
+  const [produto, setProduto] = React.useState(null);
 
-  // Efeito antes de desmonta
   React.useEffect(() => {
-    function handleScroll(event) {
-      console.log(event);
-    }
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    const produtoLocal = window.localStorage.getItem('produto');
+    if (produtoLocal !== null) setProduto(produtoLocal);
   }, []);
 
-  return (
-    <div style={{ height: '220vh' }}>
-      <ConhecimetoBasico />
-      <br />
-      <ComponenteMontou />
-      <br />
+  React.useEffect(() => {
+    if (produto != null) {
+      window.localStorage.setItem('produto', produto);
+    }
+  }, [produto]);
 
-      <h3>Ativa e Desativa a Mensagem</h3>
-      <button onClick={() => setAtivo(!ativo)}>
-        {!ativo ? 'Ativar' : 'Desativar'}
+  function handleClick(event) {
+    setProduto(event.target.innerText);
+  }
+
+  return (
+    <div>
+      <h1>Preferencia: {produto}</h1>
+      <button onClick={handleClick}>notebook</button>
+      <button onClick={handleClick} style={{ margin: '.5rem' }}>
+        smartphone
       </button>
-      {ativo && <Produto />}
+      <Produto produto={produto} />
     </div>
   );
 };
