@@ -5,12 +5,15 @@ const Produto = () => {
   const global = React.useContext(GlobalContext);
   console.log(global);
 
+  if (global.dados === null) return null;
   return (
     <div>
-      Produto:
-      {global.contar}
-      <br />
-      <button onClick={() => global.adicionarDois()}>Adicionar</button>
+      Produtos:
+      <ul>
+        {global.dados.map((produto) => (
+          <li>{produto.nome}</li>
+        ))}
+      </ul>
     </div>
   );
 };
