@@ -3,42 +3,35 @@ import useLocalStorage from './useLocalStorage';
 import useFetch from './useFetch';
 
 const App = () => {
-  const [produto, setProduto] = useLocalStorage('Produto', 'null');
-  const { request, data, loading, error } = useFetch();
+  //Correto
 
-  React.useEffect(() => {
-    async function fecthData() {
-      const { response, json } = await request(
-        'https://ranekapi.origamid.dev/json/api/produto/',
-      );
-      console.log(response, json);
-    }
-    fecthData();
-  }, [request]);
-
-  function handleClick({ target: { innerText } }) {
-    setProduto(innerText);
+  //Jeito ERRADOS de usar os hooks
+  //Colocar dentro de um IF
+  let condicao = true;
+  if (condicao) {
+    React.useEffect(() => (document.title = 'Titule novo'));
   }
 
-  if (error) return <p>{error}</p>;
-  if (loading) return <div>Carregando...</div>;
-  if (data)
-    return (
-      <div>
-        <p>Produto Preferido: {produto}</p>
-        <button onClick={handleClick}>notebook</button>
-        <button onClick={handleClick} style={{ margin: '.5rem' }}>
-          smartphone
-        </button>
+  //Colocar dentro de uma Function
+  function mudarTitulo() {
+    React.useEffect(() => (document.title = 'Titule novo'));
+  }
 
-        {data.map((produto) => (
-          <div key={handleClick}>
-            <h1>{produto.nome}</h1>
-          </div>
-        ))}
-      </div>
-    );
-  else return null;
+  //Colocar dentro de um For loop
+  for (let i = 0; (i = 10); i++) {
+    React.useEffect(() => (document.title = 'Titule novo'));
+  }
+
+  //Errado, mas pode se transformar em um custom hook se começar com "use"
+  //Exemplo
+  function useNumeroAleatorio() {
+    const numero = Math.random();
+    React.useEffect(() => {
+      document.title = numero;
+    }, []);
+  }
+
+  return <> </>;
 };
 
 export default App;
