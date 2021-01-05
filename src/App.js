@@ -1,56 +1,37 @@
 import React from 'react';
 
 const App = () => {
-  const [produto, setProduto] = React.useState('');
-  const [cor, setCor] = React.useState('');
+  const [cores, setCores] = React.useState(['vermelho', 'azul']);
 
-  function handleChange({ target: { value } }) {
-    setProduto(value);
+  function handleChange({ target }) {
+    if (target.checked) setCores([...cores, target.value]);
+    else setCores(cores.filter((cor) => cor !== target.value));
+  }
+
+  function checkColor(cor) {
+    return cores.includes(cor);
   }
 
   return (
     <form>
-      <h1>Produtos</h1>
       <label>
         <input
-          type="radio"
-          value="notebook"
-          onChange={handleChange}
-          checked={produto === 'notebook'}
-        />
-        Notebook
-      </label>
-      <label>
-        <input
-          type="radio"
-          value="smartphone"
-          onChange={handleChange}
-          checked={produto === 'smartphone'}
-        />
-        Smartphone
-      </label>
-      {produto}
-
-      <h1>Cor</h1>
-      <label>
-        <input
-          type="radio"
+          type="checkbox"
           value="azul"
-          onChange={({ target }) => setCor(target.value)}
-          checked={cor === 'azul'}
+          checked={checkColor('azul')}
+          onChange={handleChange}
         />
         Azul
       </label>
-      <label>
+      <label> 
         <input
-          type="radio"
+          type="checkbox"
           value="vermelho"
-          onChange={({ target }) => setCor(target.value)}
-          checked={cor === 'vermelho'}
+          checked={cores.includes('vermelho')}
+          onChange={handleChange}
         />
         Vermelho
       </label>
-      {cor}
     </form>
   );
 };
